@@ -43,7 +43,7 @@ public class XMLDao<T> extends AbstractDao<T>{
                     System.out.println("Место в чате не прошло валидацию");
                 }
                 if(matches( "^[0-9]+$", duration.toString()) == false) {
-                    System.out.println("Место в чате не прошло валидацию");
+                    System.out.println("Длительность не прошла валидацию");
                 }
 
 
@@ -71,7 +71,9 @@ public class XMLDao<T> extends AbstractDao<T>{
 
                 String date = songs_2.item(i).getChildNodes().item(9).getTextContent();
                 String place = songs_2.item(i).getChildNodes().item(11).getTextContent();
-
+                if(matches( "^[0-9]+$", duration.toString()) == false) {
+                    System.out.println("Длительность не прошла валидацию");
+                }
 
                 if(matches( "([1-9]|[1-3][0-9])\\s[а-я]+\\s([0-1][0-9][0-9][0-9]|[2][0][0-2][0-9])\\s[а-я]+", date) == false) {
                     System.out.println("Год не прошло валидацию");

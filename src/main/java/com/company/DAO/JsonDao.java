@@ -14,6 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.util.regex.Pattern.matches;
+
 public class JsonDao<T> extends AbstractDao<T>{
     @Override
     public ArrayList<T> read(String filename, String filename_2) throws IOException, ParseException {
@@ -40,7 +42,12 @@ public class JsonDao<T> extends AbstractDao<T>{
             String studio = String.valueOf(songItemJson.get("studio"));
             Single songItem = new Single(name, singer, duration, place, studio);
 
-
+            if(matches( "^[0-9]+$", place.toString()) == false) {
+                System.out.println("Место в чате не прошло валидацию");
+            }
+            if(matches( "^[0-9]+$", duration.toString()) == false) {
+                System.out.println("Длительность не прошла валидацию");
+            }
             //System.out.println(songItem.Log());
             songsArray.add((T) songItem);
         }
@@ -66,8 +73,15 @@ public class JsonDao<T> extends AbstractDao<T>{
             String townPlace = (String) songItemJson.get("date");
 
             Live songItem = new Live(name, singer, duration, place, date, townPlace);
-
-
+            if(matches( "^[0-9]+$", place.toString()) == false) {
+                System.out.println("Место в чате не прошло валидацию");
+            }
+            if(matches( "^[0-9]+$", duration.toString()) == false) {
+                System.out.println("Длительность не прошла валидацию");
+            }
+            if(matches( "([1-9]|[1-3][0-9])\\s[а-я]+\\s([0-1][0-9][0-9][0-9]|[2][0][0-2][0-9])\\s[а-я]+", date) == false) {
+                System.out.println("Год не прошло валидацию");
+            }
             //System.out.println(songItem.Log());
             songsArray.add((T) songItem);
 
